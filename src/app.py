@@ -11,3 +11,6 @@ mongo = PyMongo(app)
 @app.route('/hello-world', methods=['GET'])
 def hello_world():
   return {'message': 'hello world'};
+
+# Import services routes
+import src.services.aaa
