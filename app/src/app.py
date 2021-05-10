@@ -11,8 +11,7 @@ db = client.SampleCollections
 
 @app.route('/hello-world', methods=['GET'])
 def hello_world():
-  return {'message': 'hello world'};
-
+  return {'message': 'Hello World!'}
 
 @app.route('/anime', methods=['GET'])
 def list_anime():
@@ -43,7 +42,8 @@ def create_anime():
         'n_episodes': n_episodes,
         'status': status
       }
-    )
+    ).inserted_id
+    
     response = {
       'id': str(id),
       'title': title,
