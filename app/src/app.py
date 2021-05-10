@@ -1,9 +1,9 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, render_template
 from pymongo import MongoClient
 from bson import json_util
 from bson.objectid import ObjectId
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 
 client = MongoClient("mongo", 27017)
 db = client.SampleCollections
@@ -12,6 +12,7 @@ db = client.SampleCollections
 @app.route('/hello-world', methods=['GET'])
 def hello_world():
   return {'message': 'Hello World!'}
+
 
 @app.route('/anime', methods=['GET'])
 def list_anime():
@@ -43,7 +44,7 @@ def create_anime():
         'status': status
       }
     ).inserted_id
-    
+
     response = {
       'id': str(id),
       'title': title,
@@ -91,3 +92,7 @@ def delete_anime(id):
   db.anime.delete_one({'_id': ObjectId(id)})
   return {'message': 'Deleted succesfully'};
 
+
+@app.route('/hello/<name>')
+def index(name):
+  return render_template('index.html', name=name)
