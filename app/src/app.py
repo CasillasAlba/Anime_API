@@ -94,5 +94,5 @@ def delete_anime(id):
 
 
 @app.route('/hello/<name>')
-def index(name):
-  return render_template('index.html', name=name)
+def greet(name):
+  return render_template('greet.html', name=name)
